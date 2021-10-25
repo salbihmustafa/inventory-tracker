@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .navbar {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 nav {
   display: flex;
