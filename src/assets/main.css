@@ -81,3 +81,7 @@ textarea {
   font-size: 14px;
   margin: 16px 0;
 }
+
+span{
+  color: var(--primary);
+}
