@@ -1,9 +1,12 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <h3>Sign up</h3>
-    <input type="text" placeholder="Display Name" v-model="displayName" />
-    <input type="email" placeholder="Email" v-model="email" />
-    <input :type="passtype" placeholder="Password" v-model="password" />
+    <label for="displayName">Display Name</label>
+    <input type="text" name="displayName" v-model="displayName" />
+    <label for="email">Email</label>
+    <input type="email" name="email" v-model="email" />
+    <label for="password">Password</label>
+    <input :type="passtype" name="password" v-model="password" />
     <div v-if="!visible">
       <span class="material-icons" @click="toggleVisibility">visibility_off</span>
     </div>
@@ -70,10 +73,15 @@ export default {
 h3 {
   text-align: center;
 }
+label{
+  position: relative;
+  left: 10px;
+  top: 5px;
+}
 span {
   position: relative;
-  top: -50px;
-  left: 375px;
+  top: -40px;
+  left: 365px;
   cursor: pointer;
 }
 </style>

@@ -65,14 +65,23 @@ form {
 }
 input,
 textarea {
-  border: 0;
-  border-bottom: 1px solid var(--secondary);
+  border: none;
+  background: var(--secondary);
   padding: 10px;
   outline: none;
   display: block;
   width: 100%;
   box-sizing: border-box;
-  margin: 20px auto;
+  border-radius: 10px;
+  margin: 10px auto;
+}
+
+label {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--primary);
+  display: block;
 }
 
 /* error text */
