@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Signup from '../views/auth/Signup.vue'
+import Login from '../views/auth/Login.vue'
 
 //route guard
 import { projectAuth } from '../firebase/config';
@@ -26,6 +27,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
 ]
 
