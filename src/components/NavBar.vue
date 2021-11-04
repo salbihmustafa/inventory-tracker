@@ -28,7 +28,8 @@
           <button @click.prevent="handleLogout">Logout</button>
         </div>
         <div v-else>
-          <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
+          <router-link class="btn" :to="{ name: 'Signup' }">Sign up</router-link>
+          <router-link class="btn" :to="{ name: 'Login' }">Log in</router-link>
         </div>
       </div>
     </nav>
@@ -69,5 +70,8 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+}
+a{
+  margin: 10px;
 }
 </style>

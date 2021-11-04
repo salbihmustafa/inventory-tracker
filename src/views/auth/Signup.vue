@@ -8,7 +8,9 @@
     <label for="password">Password</label>
     <input :type="passtype" name="password" v-model="password" />
     <div v-if="!visible">
-      <span class="material-icons" @click="toggleVisibility">visibility_off</span>
+      <span class="material-icons" @click="toggleVisibility"
+        >visibility_off</span
+      >
     </div>
     <div v-if="visible">
       <span class="material-icons" @click="toggleVisibility">visibility</span>
@@ -16,6 +18,12 @@
     <div class="error" v-if="error">{{ error }}</div>
     <button v-if="!isPending">Sign Up</button>
     <button v-if="isPending" disabled>Loading..</button>
+    <div class="line">
+      <hr class="solid" />
+    </div>
+    <div class="option">
+      <div>Have an account? <router-link :to="{ name: 'Login' }">Log in</router-link></div>
+    </div>
   </form>
 </template>
 
@@ -25,11 +33,11 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
-  data(){
+  data() {
     return {
       visible: false, //toggle to show or hide password
-      passtype: 'password',
-    }
+      passtype: "password",
+    };
   },
   setup() {
     const { error, signup, isPending } = useSignup();
@@ -55,17 +63,17 @@ export default {
     return { displayName, email, password, handleSubmit, error, isPending };
   },
   methods: {
-    toggleVisibility () {
+    toggleVisibility() {
       this.visible = !this.visible;
-      if(this.visible){
+      if (this.visible) {
         //show password
-        this.passtype = 'text';
-      }else{
+        this.passtype = "text";
+      } else {
         //hide password
-        this.passtype = 'password';
+        this.passtype = "password";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -73,7 +81,7 @@ export default {
 h3 {
   text-align: center;
 }
-label{
+label {
   position: relative;
   left: 10px;
   top: 5px;
@@ -83,5 +91,37 @@ span {
   top: -40px;
   left: 365px;
   cursor: pointer;
+}
+button {
+  /* match width of inputs */
+  box-sizing: border-box;
+  width: 100%;
+}
+div.line{
+  display: flex;
+  justify-content: center;
+}
+hr.solid {
+  margin: 30px 0;
+  border-top: 1px solid #bbb;
+  box-sizing: border-box;
+  width: 90%;
+}
+/* option */
+div.option{
+  display: flex;
+  justify-content: center;
+}
+div.option div{
+  color: #bbb;
+}
+div.option div a{
+  font-weight: bold;
+  opacity: .6;
+  transition: 0.3s;
+}
+div.option div a:hover{
+  font-weight: 900;
+  opacity: 1;
 }
 </style>

@@ -14,6 +14,12 @@
     <div class="error" v-if="error">{{ error }}</div>
     <button v-if="!isPending">Log in</button>
     <button v-if="isPending" disabled>Loading..</button>
+    <div class="line">
+      <hr class="solid" />
+    </div>
+    <div class="option">
+      <div>Don't have an account? <router-link :to="{ name: 'Signup' }">Sign up</router-link></div>
+    </div>
   </form>
 </template>
 
@@ -77,5 +83,38 @@ span {
   top: -40px;
   left: 365px;
   cursor: pointer;
+}
+button{
+    /* match width of inputs */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+div.line{
+  display: flex;
+  justify-content: center;
+}
+hr.solid {
+  margin: 30px 0;
+  border-top: 1px solid #bbb;
+  box-sizing: border-box;
+  width: 90%;
+}
+/* option */
+div.option{
+  display: flex;
+  justify-content: center;
+}
+div.option div{
+  color: #bbb;
+}
+div.option div a{
+  font-weight: bold;
+  opacity: .6;
+  transition: 0.3s;
+}
+div.option div a:hover{
+  font-weight: 900;
+  opacity: 1;
 }
 </style>
