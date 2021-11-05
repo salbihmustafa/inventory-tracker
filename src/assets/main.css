@@ -74,6 +74,7 @@ textarea {
   box-sizing: border-box;
   border-radius: 10px;
   margin: 10px auto;
+  color: black;
 }
 
 label {
@@ -92,5 +93,5 @@ label {
 }
 
 span{
-  color: var(--primary);
+  color: black;
 }

@@ -21,7 +21,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    //beforeEnter: requireAuth
+    beforeEnter: requireAuth
   },
   {
     path: '/signup',
