@@ -1,19 +1,19 @@
 <template>
   <div>
     <h1>Inventory List</h1>
-    <Card v-for="item in items" :key="item.id" :data="items" />
+    <ListView v-for="item in items" :key="item.id" :data="item" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Card from "@/components/UI/Card";
+import ListView from "@/components/ListView";
 import { ref } from "vue";
 import { Guid } from "js-guid";
 
 export default {
   name: "Home",
-  components: { Card },
+  components: { ListView },
   setup() {
     const items = ref([]);
     let item1 = {
