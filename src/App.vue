@@ -1,7 +1,9 @@
 <template>
   <div class="content">
     <NavBar />
-    <div class="sub-content"><router-view /></div>
+    <div class="sub-content">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -15,10 +17,9 @@ export default {
 <style>
 .content {
   margin: 0 auto; /*center page*/
-  max-width: 1200px;
-  padding: 0 20px;
+  max-width: 100%;
 }
 .sub-content {
-  margin: 40px auto;
+  margin: 40px 20px;
 }
 </style>

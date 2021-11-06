@@ -43,8 +43,12 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  background: #fff;
 }
 a{
+  margin: 10px;
+}
+button{
   margin: 10px;
 }
 </style>
