@@ -2,7 +2,7 @@
   <div class="list-wrapper">
     <div class="information">
       <div class="title">
-        {{ data.title }}
+        <p>{{ data.title }}</p>
       </div>
       <div class="second-line">
         <h4><span>Price Listed:</span> ${{ data.priceListed }}</h4>
@@ -34,21 +34,32 @@ export default {
 
 <style scoped>
 .list-wrapper {
+  border: 1px solid yellow;
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 10px 20px 20px 20px rgba(50, 50, 50, 0.3);
   background: #fff;
-  border: 1px solid var(--secondary);
+  /* border: 1px solid var(--secondary); */
   cursor: pointer;
 
+  display: flex;
+}
+
+.information{
+  border: 1px solid red;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
-.information
+.actions{
+  border: 1px solid green;
+  min-width: 0;
+}
 
-.title {
+/* .title {
   display: flex;
   justify-content: start;
 }
@@ -63,7 +74,7 @@ span {
 }
 hr {
   margin: 0 10px;
-}
+} */
 
 @media screen and (max-width: 500px) {
   .title p {

@@ -4,12 +4,10 @@
     <label for="email">Email</label>
     <input type="email" name="email" v-model="email" />
     <label for="password">Password</label>
-    <input :type="passtype" name="password" v-model="password" />
-    <div v-if="!visible">
-      <span class="material-icons" @click="toggleVisibility">visibility_off</span>
-    </div>
-    <div v-if="visible">
-      <span class="material-icons" @click="toggleVisibility">visibility</span>
+    <div class="pass-icon-wrap">
+      <input class="input-with-icon" :type="passtype" name="password" v-model="password" />
+      <span v-if="!visible" class="material-icons input-icon" @click="toggleVisibility">visibility_off</span>
+      <span v-if="visible" class="material-icons input-icon" @click="toggleVisibility">visibility</span>
     </div>
     <div class="error" v-if="error">{{ error }}</div>
     <button v-if="!isPending">Log in</button>
@@ -18,22 +16,25 @@
       <hr class="solid" />
     </div>
     <div class="option">
-      <div>Don't have an account? <router-link :to="{ name: 'Signup' }">Sign up</router-link></div>
+      <div>
+        Don't have an account?
+        <router-link :to="{ name: 'Signup' }">Sign up</router-link>
+      </div>
     </div>
   </form>
 </template>
 
 <script>
-import useLogin from '@/composables/useLogin.js';
+import useLogin from "@/composables/useLogin.js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
-  data(){
+  data() {
     return {
       visible: false, //toggle to show or hide password
-      passtype: 'password',
-    }
+      passtype: "password",
+    };
   },
   setup() {
     const { error, login, isPending } = useLogin();
@@ -55,17 +56,17 @@ export default {
     return { email, password, handleSubmit, error, isPending };
   },
   methods: {
-    toggleVisibility () {
+    toggleVisibility() {
       this.visible = !this.visible;
-      if(this.visible){
+      if (this.visible) {
         //show password
-        this.passtype = 'text';
-      }else{
+        this.passtype = "text";
+      } else {
         //hide password
-        this.passtype = 'password';
+        this.passtype = "password";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -73,24 +74,30 @@ export default {
 h3 {
   text-align: center;
 }
-label{
+label {
   position: relative;
   left: 10px;
   top: 5px;
 }
-span {
-  position: relative;
-  top: -40px;
-  left: 365px;
-  cursor: pointer;
-}
-button{
-    /* match width of inputs */
-    box-sizing: border-box;
-    width: 100%;
+
+button {
+  /* match width of inputs */
+  box-sizing: border-box;
+  width: 100%;
 }
 
-div.line{
+.pass-icon-wrap {    
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.input-with-icon {
+  border: none;
+  flex: 1;
+}
+
+div.line {
   display: flex;
   justify-content: center;
 }
@@ -101,19 +108,19 @@ hr.solid {
   width: 90%;
 }
 /* option */
-div.option{
+div.option {
   display: flex;
   justify-content: center;
 }
-div.option div{
+div.option div {
   color: #bbb;
 }
-div.option div a{
+div.option div a {
   font-weight: bold;
-  opacity: .6;
+  opacity: 0.6;
   transition: 0.3s;
 }
-div.option div a:hover{
+div.option div a:hover {
   font-weight: 900;
   opacity: 1;
 }
