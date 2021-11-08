@@ -6,14 +6,10 @@
     <label for="email">Email</label>
     <input type="email" name="email" v-model="email" />
     <label for="password">Password</label>
-    <input :type="passtype" name="password" v-model="password" />
-    <div v-if="!visible">
-      <span class="material-icons" @click="toggleVisibility"
-        >visibility_off</span
-      >
-    </div>
-    <div v-if="visible">
-      <span class="material-icons" @click="toggleVisibility">visibility</span>
+    <div class="icon-container">
+      <input class="passwordBox" :type="passtype" name="password" v-model="password" />
+      <span v-if="!visible" class="material-icons passwordIcon" @click="toggleVisibility">visibility_off</span>
+      <span v-if="visible" class="material-icons passwordIcon" @click="toggleVisibility">visibility</span>
     </div>
     <div class="error" v-if="error">{{ error }}</div>
     <button v-if="!isPending">Sign Up</button>
@@ -86,12 +82,7 @@ label {
   left: 10px;
   top: 5px;
 }
-span {
-  position: relative;
-  top: -40px;
-  left: 365px;
-  cursor: pointer;
-}
+
 button {
   /* match width of inputs */
   box-sizing: border-box;

@@ -85,6 +85,24 @@ label {
   display: block;
 }
 
+/* put icon inside password box */
+.icon-container{
+  margin-bottom: 10px;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.passwordBox{
+  border-radius: 10px 0 0 10px;
+}
+.passwordIcon{
+  background: var(--secondary);
+  padding: 7px;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
+
 /* error text */
 .error {
   color: var(--warning);

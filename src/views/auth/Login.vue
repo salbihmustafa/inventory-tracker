@@ -4,10 +4,10 @@
     <label for="email">Email</label>
     <input type="email" name="email" v-model="email" />
     <label for="password">Password</label>
-    <div class="pass-icon-wrap">
-      <input class="input-with-icon" :type="passtype" name="password" v-model="password" />
-      <span v-if="!visible" class="material-icons input-icon" @click="toggleVisibility">visibility_off</span>
-      <span v-if="visible" class="material-icons input-icon" @click="toggleVisibility">visibility</span>
+    <div class="icon-container">
+      <input class="passwordBox" :type="passtype" name="password" v-model="password" />
+      <span v-if="!visible" class="material-icons passwordIcon" @click="toggleVisibility">visibility_off</span>
+      <span v-if="visible" class="material-icons passwordIcon" @click="toggleVisibility">visibility</span>
     </div>
     <div class="error" v-if="error">{{ error }}</div>
     <button v-if="!isPending">Log in</button>
@@ -84,17 +84,6 @@ button {
   /* match width of inputs */
   box-sizing: border-box;
   width: 100%;
-}
-
-.pass-icon-wrap {    
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
-
-.input-with-icon {
-  border: none;
-  flex: 1;
 }
 
 div.line {

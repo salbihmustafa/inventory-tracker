@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <nav>
-      <h1><router-link :to="{ name: 'Home' }">Inventory List</router-link></h1>
+      <h1><router-link :to="{ name: 'Home' }">Azalika / UV</router-link></h1>
       <div class="links">
         <div v-if="user">
           <button @click.prevent="handleLogout">Logout</button>
