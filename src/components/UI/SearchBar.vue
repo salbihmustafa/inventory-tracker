@@ -13,11 +13,11 @@
 import { ref } from "vue";
 
 export default {
-  setup() {
+  setup(props, context) {
     const searchValue = ref("");
 
     const handleSubmit = () => {
-      console.log(searchValue.value);
+      context.emit('searchSubmitted', searchValue.value);
       searchValue.value = ""; //reset search bar
     };
 

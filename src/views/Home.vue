@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Inventory List</h1>
-    <SearchBar />
+    <SearchBar @searchSubmitted="searchHandler" />
     <ListView v-for="item in items" :key="item.id" :data="item" />
   </div>
 </template>
@@ -45,7 +45,11 @@ export default {
     items.value.push(item1);
     items.value.push(item2);
 
-    return { items };
+    const searchHandler = (data) => {
+      console.log(data);
+    }
+
+    return { items, searchHandler };
   },
 };
 </script>
