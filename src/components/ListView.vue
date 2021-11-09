@@ -1,7 +1,9 @@
 <template>
   <div class="list-container">
     <div class="list-info-container">
-      <div class="title">
+      <div class="top-line">
+        <p>Status: <span>{{ data.status }}</span></p>
+        <hr/>
         <p>{{ data.title }}</p>
       </div>
       <div class="second-line">
@@ -39,6 +41,7 @@ export default {
 <style scoped>
 span{
   color: var(--primary);
+  font-weight: bold;
 }
 .list-container {
   /* border: 1px solid yellow; */
@@ -109,7 +112,7 @@ hr {
 } */
 
 @media screen and (max-width: 500px) {
-  .title p {
+  .top-line p {
     width: 95%;
     overflow: hidden;
     white-space: nowrap;
