@@ -2,7 +2,7 @@
   <div class="ui segment">
     <form class="ui form" @submit.prevent="handleSubmit">
       <div class="ui icon input">
-        <input type="text" placeholder="Search..." v-model="searchValue" />
+        <input type="text" placeholder="Search..." v-model="searchValue"/>
         <i class="circular search link icon"></i>
       </div>
     </form>
@@ -10,14 +10,20 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export default {
+  props: ["list"],
   setup(props, context) {
     const searchValue = ref("");
 
+    const updatedList = computed(() => {
+        // update array based off search value
+        return props.list.filter((val) => val.title.toUpperCase().includes(searchValue.value.toUpperCase()));
+    });
+
     const handleSubmit = () => {
-      context.emit('searchSubmitted', searchValue.value);
+      context.emit("searchSubmitted", updatedList); //send updated list to parent
       searchValue.value = ""; //reset search bar
     };
 
