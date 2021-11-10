@@ -47,6 +47,7 @@ nav {
 }
 a{
   margin: 10px;
+  color: var(--primary);
 }
 button{
   margin: 10px;

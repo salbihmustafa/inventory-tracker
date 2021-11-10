@@ -1,7 +1,8 @@
 <template>
+  <UploadCsv v-show="true"/>
   <div>
     <h1>Inventory List</h1>
-    <SearchBar @searchSubmitted="searchHandler" :list="items"/>
+    <SearchBar @searchSubmitted="searchHandler" :list="items" />
     <ListView v-for="item in updatedItems" :key="item.id" :data="item" />
   </div>
 </template>
@@ -10,16 +11,19 @@
 // @ is an alias to /src
 import ListView from "@/components/ListView";
 import SearchBar from "@/components/UI/SearchBar";
+import UploadCsv from "@/components/UploadCsv";
+
 import { ref } from "vue";
 import { Guid } from "js-guid";
 
 export default {
   name: "Home",
-  components: { ListView, SearchBar },
+  components: { ListView, SearchBar, UploadCsv },
   setup() {
     const items = ref([
       {
-        title: "Rebecca Vallance Women's Sz 2 Billie Ruffle Ice Blue Off The Shoulder Mini Dress",
+        title:
+          "Rebecca Vallance Women's Sz 2 Billie Ruffle Ice Blue Off The Shoulder Mini Dress",
         priceListed: 170,
         paid: 41.62,
         fiftyPercent: 104.05,
@@ -31,7 +35,8 @@ export default {
         id: Guid.newGuid().toString(),
       },
       {
-        title: "Alexis Women's Sz XS Faine Floral Hawaiian V-Neck Ruffle Calipso Red Romper",
+        title:
+          "Alexis Women's Sz XS Faine Floral Hawaiian V-Neck Ruffle Calipso Red Romper",
         priceListed: 170,
         paid: 41.62,
         fiftyPercent: 104.05,
@@ -47,10 +52,8 @@ export default {
     const updatedItems = ref(items.value);
 
     const searchHandler = (updatedList) => {
-      updatedItems.value = updatedList.value; //update 
+      updatedItems.value = updatedList.value; //update
     };
-
-    
 
     return { items, searchHandler, updatedItems };
   },
