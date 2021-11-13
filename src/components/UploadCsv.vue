@@ -1,30 +1,60 @@
 <template>
   <div class="backdrop">
     <div class="modal">
-      <form>
-        <label for="myfile" class="btn">Select a file</label>
-        <input type="file" id="myfile" name="myfile" class="btn" @change="previewFile"/>
-        <label for="myfile" class="btn filename">{{file}}</label>
-        <button>Upload</button>
+      <form @dragover.prevent @drop.prevent>
+        <div @drop="dragFile" class="drop-area">
+          <span
+            v-if="inputFile.length === 0"
+            class="drop-area-prompt"
+            @click="clkInput"
+            >Drop file here or click to upload</span
+          >
+          <span
+            v-if="inputFile"
+            class="drop-area-prompt-file"
+            @click="clkInput"
+            >{{ inputFile.name }}</span
+          >
+          <input
+            type="file"
+            ref="file"
+            class="drop-area-input"
+            @change="uploadFile"
+          />
+        </div>
+        <div class="two-btn">
+          <button class="cancel-btn">Cancel</button>
+          <button>Upload</button>
+        </div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
-    setup(){
-        const file = ref('');
+  setup(props, context) {
+    const inputFile = ref([]);
+    const file = ref(null);
 
-        const previewFile = (event) => {
-            debugger;
-            file.value = event.target.files[0].name;
-        }
+    const clkInput = () => {
+      file.value.click();
+    };
 
-        return { file, previewFile }
-    }
+    const uploadFile = (event) => {
+      //entire file with attributes such as type: "image/jpeg" - "application/vnd.ms-excel" <-CSV, name: "Free2.jpg", etc..
+      inputFile.value = event.target.files[0];
+      console.log(inputFile.value);
+    };
+
+    const dragFile = (event) => {
+      inputFile.value = event.dataTransfer.files[0];
+    };
+
+    return { inputFile, file, clkInput, uploadFile, dragFile };
+  },
 };
 </script>
 
@@ -42,22 +72,43 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
-form{
-    display: flex;
-    flex-direction: column;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.btn{
-    margin: 10px 0;
-    text-align: center;
+
+.drop-area {
+  max-width: 200px;
+  height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cccccc;
+  border: 4px dashed var(--primary);
+  border-radius: 10px;
 }
-.btn.filename{
-    border: none;
+.drop-area:hover {
+  border-style: solid;
 }
-button{
-    margin-top: 10px;
+.drop-area:hover .drop-area-prompt {
+  color: var(--primary);
 }
-input[type="file"] {
-    /* opacity: 0; */
-    display: none;
+.drop-area-input {
+  display: none;
+}
+.drop-area-prompt {
+  color: #cccccc;
+}
+.drop-area-prompt-file {
+  max-width: 175px;
+  word-wrap: break-word; /* wrap the word inside a span*/
+  color: var(--primary);
 }
 </style>
