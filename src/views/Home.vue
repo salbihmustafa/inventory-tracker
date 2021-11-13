@@ -1,8 +1,9 @@
 <template>
-  <UploadCsv v-show="true"/>
+  <UploadCsv v-if="toggleUpload" @cancelModal="handleCancelModal" />
   <div>
     <h1>Inventory List</h1>
     <SearchBar @searchSubmitted="searchHandler" :list="items" />
+    <button @click="toggleUpload = !toggleUpload">Upload CSV</button>
     <ListView v-for="item in updatedItems" :key="item.id" :data="item" />
   </div>
 </template>
@@ -50,12 +51,18 @@ export default {
     ]);
 
     const updatedItems = ref(items.value);
+    const toggleUpload = ref(false); //do not show modal
 
     const searchHandler = (updatedList) => {
       updatedItems.value = updatedList.value; //update
     };
 
-    return { items, searchHandler, updatedItems };
+    const handleCancelModal = () => {
+      //toggle upload modal
+      toggleUpload.value = !toggleUpload.value;
+    };
+
+    return { items, searchHandler, updatedItems, handleCancelModal, toggleUpload };
   },
 };
 </script>

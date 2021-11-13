@@ -23,7 +23,7 @@
           />
         </div>
         <div class="two-btn">
-          <button class="cancel-btn">Cancel</button>
+          <button class="cancel-btn" @click="handleCancel">Cancel</button>
           <button>Upload</button>
         </div>
       </form>
@@ -40,7 +40,7 @@ export default {
     const file = ref(null);
 
     const clkInput = () => {
-      file.value.click();
+      file.value.click(); //click the input type file
     };
 
     const uploadFile = (event) => {
@@ -53,7 +53,11 @@ export default {
       inputFile.value = event.dataTransfer.files[0];
     };
 
-    return { inputFile, file, clkInput, uploadFile, dragFile };
+    const handleCancel = () => {
+      context.emit('cancelModal');
+    }
+
+    return { inputFile, file, clkInput, uploadFile, dragFile, handleCancel };
   },
 };
 </script>
