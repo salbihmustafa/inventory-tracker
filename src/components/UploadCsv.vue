@@ -1,10 +1,10 @@
 <template>
   <div class="backdrop">
     <div class="modal">
-      <form @dragover.prevent @drop.prevent>
+      <form @dragover.prevent @drop.prevent @submit.prevent="submitHandler">
         <div @drop="dragFile" class="drop-area">
           <span
-            v-if="inputFile.length === 0"
+            v-if="!inputFile"
             class="drop-area-prompt"
             @click="clkInput"
             >Drop file here or click to upload</span
@@ -19,6 +19,7 @@
             type="file"
             ref="file"
             class="drop-area-input"
+            accept=".csv"
             @change="uploadFile"
           />
         </div>
@@ -33,10 +34,11 @@
 
 <script>
 import { ref } from "vue";
+import convertCsvToJson from "@/composables/convertCsvToJson.js";
 
 export default {
   setup(props, context) {
-    const inputFile = ref([]);
+    const inputFile = ref();
     const file = ref(null);
 
     const clkInput = () => {
@@ -46,7 +48,6 @@ export default {
     const uploadFile = (event) => {
       //entire file with attributes such as type: "image/jpeg" - "application/vnd.ms-excel" <-CSV, name: "Free2.jpg", etc..
       inputFile.value = event.target.files[0];
-      console.log(inputFile.value);
     };
 
     const dragFile = (event) => {
@@ -57,7 +58,17 @@ export default {
       context.emit('cancelModal');
     }
 
-    return { inputFile, file, clkInput, uploadFile, dragFile, handleCancel };
+    const submitHandler = async () => {
+      if(!inputFile.value){
+        return;
+      }
+
+      const { jsonVal } = await convertCsvToJson(inputFile.value);
+      console.log("My converted CSV to JSON: ", jsonVal.value);
+      
+    }
+
+    return { inputFile, file, clkInput, uploadFile, dragFile, handleCancel, submitHandler };
   },
 };
 </script>
