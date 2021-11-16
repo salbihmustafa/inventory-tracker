@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { Guid } from "js-guid";
 
 const convertCsvToJson = async (csvFile) => {
   const jsonVal = ref(null); //initiate jsonVal
@@ -21,6 +22,7 @@ const convertCsvToJson = async (csvFile) => {
 
     let result = [];
     let headers = lines[0].split(","); //split the first array into headers
+    headers.push("id");
 
     //loop through the data minus the headers
     for (var i = 1; i < lines.length; i++) {
@@ -28,14 +30,20 @@ const convertCsvToJson = async (csvFile) => {
       var currentline = lines[i].split(","); //split the lines of the data
       //loop through the header
       for (var j = 0; j < headers.length; j++) {
-        //for each header place the current line value that matches the header
-        obj[headers[j]] = currentline[j]; 
+        if(headers[j] == "id"){
+          obj[headers[j]] = Guid.newGuid().toString(); //add guid id
+        }else{
+          //for each header place the current line value that matches the header
+          obj[headers[j]] = currentline[j];
+        }
       }
 
       result.push(obj); //insert into array
     }
-
-    jsonVal.value = JSON.stringify(result); //convert array into JSON format
+    let updatedResults = result.filter((item) => {
+      return item.title !== "" && item.title !== undefined;
+    })
+    jsonVal.value = updatedResults;
   } catch (err) {
     debugger;
     console.log(err);

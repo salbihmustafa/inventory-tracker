@@ -55,7 +55,7 @@ export default {
     };
 
     const handleCancel = () => {
-      context.emit('cancelModal');
+      context.emit('closeModal'); //goes to parent component Home.vue
     }
 
     const submitHandler = async () => {
@@ -64,8 +64,8 @@ export default {
       }
 
       const { jsonVal } = await convertCsvToJson(inputFile.value);
-      console.log("My converted CSV to JSON: ", jsonVal.value);
-      
+      context.emit('uploadCsv', jsonVal.value); //goes to parent component Home.vue
+      context.emit('closeModal'); //goes to parent component Home.vue
     }
 
     return { inputFile, file, clkInput, uploadFile, dragFile, handleCancel, submitHandler };

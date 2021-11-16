@@ -8,9 +8,9 @@
       </div>
       <div class="second-line">
         <hr />
-        <p>Price Listed: ${{ data.priceListed }}</p>
-        <p>Paid: ${{ data.paid }}</p>
-        <p>50% Offer: ${{ data.fiftyPercent }}</p>
+        <p>Price Listed: {{ data.priceListed }}</p>
+        <p>Paid: {{ data.paid }}</p>
+        <p>50% Offer: {{ data.fiftyPercent }}</p>
         <hr />
       </div>
     </div>

@@ -1,9 +1,16 @@
 <template>
-  <UploadCsv v-if="toggleUpload" @cancelModal="handleCancelModal" />
+  <UploadCsv
+    v-if="toggleUpload"
+    @closeModal="handleCloseModal"
+    @uploadCsv="handleUploadCsv"
+  />
   <div>
     <h1>Inventory List</h1>
+    <div class="below-searchbar">
+      <button @click="toggleUpload = !toggleUpload">Upload CSV</button>
+      <label>Number of items: {{ updatedItems.length }}</label>
+    </div>
     <SearchBar @searchSubmitted="searchHandler" :list="items" />
-    <button @click="toggleUpload = !toggleUpload">Upload CSV</button>
     <ListView v-for="item in updatedItems" :key="item.id" :data="item" />
   </div>
 </template>
@@ -50,19 +57,40 @@ export default {
       },
     ]);
 
-    const updatedItems = ref(items.value);
+    //const updatedItems = ref(items.value);
+    const updatedItems = ref([]);
     const toggleUpload = ref(false); //do not show modal
 
     const searchHandler = (updatedList) => {
       updatedItems.value = updatedList.value; //update
     };
 
-    const handleCancelModal = () => {
+    const handleCloseModal = () => {
       //toggle upload modal
       toggleUpload.value = !toggleUpload.value;
     };
 
-    return { items, searchHandler, updatedItems, handleCancelModal, toggleUpload };
+    const handleUploadCsv = (data) => {
+      //handle uploads
+      updatedItems.value = data;
+      console.log(updatedItems.value);
+    };
+
+    return {
+      items,
+      searchHandler,
+      updatedItems,
+      handleCloseModal,
+      handleUploadCsv,
+      toggleUpload,
+    };
   },
 };
 </script>
+<style scoped>
+  .below-searchbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
